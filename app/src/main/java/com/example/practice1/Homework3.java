@@ -7,8 +7,10 @@ import java.util.Scanner;
 public class Homework3 {
     public static void main(String[] args) {
         createOneDArrayFromTwoDArray();
-
+        System.out.println();
         create3DArray();
+        System.out.println();
+        findElementInArray();
     }
 
     static void createOneDArrayFromTwoDArray() {
@@ -83,5 +85,40 @@ public class Homework3 {
             }
         }
         System.out.println("Строковое представление массива: " + Arrays.deepToString(arrayString));
+    }
+
+    static void findElementInArray() {
+        System.out.println("Введите два целых числа (>=0) для определения размерности двумерного массива.");
+        Scanner in = new Scanner(System.in);
+        int arraySize1 = in.nextInt();
+        int arraySize2 = in.nextInt();
+        int[][] array = new int[arraySize1][arraySize2];
+        Random rnd = new Random();
+
+        for (int[] innerArray : array) {
+            for (int index2 = 0; index2 < innerArray.length; index2++) {
+                innerArray[index2] = rnd.nextInt(100);
+            }
+        }
+        System.out.println(Arrays.deepToString(array));
+
+        System.out.println("Введите целое число (>=0).");
+        int number = in.nextInt();
+        int counter = 0;
+
+        for (int[] innerArray : array) {
+            for (int element : innerArray) {
+                if (element % number != 0) {
+                    System.out.print(element + " ");
+                    counter++;
+                } else {
+                    System.out.println("| Найден искомый элемент - " + element + " (делится на " + number + " без остатка).");
+                    return;
+                }
+            }
+        }
+        if (counter == arraySize1 * arraySize2) {
+            System.out.println("| Искомый элемен не найден.");
+        }
     }
 }
