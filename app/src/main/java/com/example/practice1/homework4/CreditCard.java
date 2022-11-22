@@ -9,12 +9,18 @@ public class CreditCard {
         this.currentBalance = currentSum;
     }
 
-    int plusSum(int sum) {
-        return currentBalance += sum;
+    void plusSum(int sum) {
+        currentBalance += sum;
     }
 
-    int minusSum(int sum) {
-        return currentBalance -= sum;
+    void minusSum(int sum) {
+        if (sum > currentBalance) {
+            printError();
+        } else currentBalance -= sum;
+    }
+
+    void printError() {
+        System.out.println("Insufficient funds.");
     }
 
     void printCurrentInfo() {

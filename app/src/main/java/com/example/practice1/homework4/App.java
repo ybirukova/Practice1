@@ -15,17 +15,15 @@ public class App {
         Scanner in = new Scanner(System.in);
         System.out.println("Enter the amount to replenish the account " + creditCard1.getAccountNumber());
         int sum1 = in.nextInt();
+        creditCard1.plusSum(sum1);
+        creditCard1.printCurrentInfo();
         System.out.println("Enter the amount to replenish the account " + creditCard2.getAccountNumber());
         int sum2 = in.nextInt();
+        creditCard2.plusSum(sum2);
+        creditCard2.printCurrentInfo();
         System.out.println("Enter the amount to withdraw from the account " + creditCard3.getAccountNumber());
         int sum3 = in.nextInt();
-
-        creditCard1.plusSum(sum1);
-        creditCard2.plusSum(sum2);
         creditCard3.minusSum(sum3);
-
-        creditCard1.printCurrentInfo();
-        creditCard2.printCurrentInfo();
         creditCard3.printCurrentInfo();
     }
 }
