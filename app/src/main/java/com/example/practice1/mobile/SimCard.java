@@ -1,10 +1,10 @@
 package com.example.practice1.mobile;
 
 public class SimCard {
-    private int number;
+    private String number;
     private int balance;
 
-    protected SimCard(int number, int balance) {
+    protected SimCard(String number, int balance) {
         this.number = number;
         this.balance = balance;
     }
@@ -17,28 +17,24 @@ public class SimCard {
         this.balance += balance;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
     public String getOperatorName() {
         String operatorName = null;
-        String number = Integer.toString(getNumber());
-
-        if (number.startsWith("29")) {
-            operatorName = "A1";
-        } else if (number.startsWith("33")) {
-            operatorName = "MTS";
-        } else if (number.startsWith("25")) {
-            operatorName = "LIFE";
+        if (!getOperatorName().startsWith("29")
+                || !getOperatorName().startsWith("33")
+                || !getOperatorName().startsWith("33")) {
+            operatorName = "Нет оператора";
         }
         return operatorName;
     }
 
-    public void makeCall(int numberTo) {
+    public void makeCall(String numberTo) {
         int payment;
-        String strNumberTo = Integer.toString(numberTo);
-        if (strNumberTo.startsWith("  ")) {
+
+        if (numberTo.startsWith("  ")) {
             payment = 1;
         } else {
             payment = 3;
@@ -51,7 +47,7 @@ public class SimCard {
         }
     }
 
-    public void receiveCall(int numberFrom) {
+    public void receiveCall(String numberFrom) {
         System.out.println("Принимаю звонок с номера " + numberFrom);
     }
 }

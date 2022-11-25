@@ -2,23 +2,22 @@ package com.example.practice1.mobile;
 
 public final class A1SimCard extends SimCard {
     A1SimCard(int number, int balance) {
-        super(290000000 + number, balance);
+        super("29" + number, balance);
     }
 
     @Override
     public String getOperatorName() {
-        return super.getOperatorName();
+        String operator = null;
+        if (getNumber().startsWith("29")) {
+            operator = "A1";
+        }
+        return operator;
     }
 
     @Override
-    public void makeCall(int numberTo) {
+    public void makeCall(String numberTo) {
         int payment;
-        String strNumberTo = Integer.toString(numberTo);
-        if (strNumberTo.startsWith("29")) {
-            payment = 1;
-        } else {
-            payment = 3;
-        }
+        payment = (numberTo.startsWith("29")) ? 1 : 3;
         if (getBalance() < payment) {
             System.out.println("Звонок запрещен.");
         } else {
@@ -28,10 +27,9 @@ public final class A1SimCard extends SimCard {
     }
 
     @Override
-    public void receiveCall(int numberFrom) {
+    public void receiveCall(String numberFrom) {
         int payment;
-        String strNumberFrom = Integer.toString(numberFrom);
-        if (strNumberFrom.startsWith("29")) {
+        if (numberFrom.startsWith("29")) {
             super.receiveCall(numberFrom);
         } else {
             payment = 1;

@@ -13,11 +13,11 @@ public class Phone {
                 ", Оператор: " + sim.getOperatorName() + ", Баланс: " + sim.getBalance());
     }
 
-    void makeCall(int numberTo) {
+    void makeCall(String numberTo) {
         sim.makeCall(numberTo);
     }
 
-    void receiveCall(int numberFrom) {
+    void receiveCall(String numberFrom) {
         sim.receiveCall(numberFrom);
     }
 

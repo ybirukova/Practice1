@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class AppMobile {
     public static void main(String[] args) {
         Random random = new Random();
-        int simArraySize = random.nextInt(6) + 1;
+        int simArraySize = random.nextInt(10) + 1;
         SimCard[] simCards = new SimCard[simArraySize];
 
         System.out.println("Список симкарт:");
@@ -27,20 +27,20 @@ public class AppMobile {
             System.out.println(simCards[i].getOperatorName() + " " + simCards[i].getNumber() + " " + simCards[i].getBalance());
         }
 
-        Phone phone = new Phone(new SimCard(290000000, 0));
+        Phone phone = new Phone(new SimCard("290000000", 0));
         System.out.println("");
         for (int i = 0; i < simCards.length; i += 2) {
             phone.insertNewSim(simCards[i]);
             System.out.println("Введите номер телефона, на который хотите позвонить (29/33/25 + 7 любых цифр)");
             Scanner in = new Scanner(System.in);
-            int numberToCall = in.nextInt();
+            String numberToCall = in.nextLine();
 
-            if (numberToCall < 250000000) {
+            if (!(numberToCall.length() == 9)) {
                 System.out.println("Неправильный номер. Номер должен иметь 9 цифр.");
                 i -= 2;
-            } else if (Integer.toString(numberToCall).startsWith("29")
-                    || Integer.toString(numberToCall).startsWith("33")
-                    || Integer.toString(numberToCall).startsWith("25")) {
+            } else if (numberToCall.startsWith("29")
+                    || numberToCall.startsWith("33")
+                    || numberToCall.startsWith("25")) {
                 phone.makeCall(numberToCall);
                 phone.printBalance();
             } else {
@@ -54,14 +54,14 @@ public class AppMobile {
             phone.insertNewSim(simCards[i]);
             System.out.println("Введите номер телефона, с которого вам звонят (29/33/25 + 7 любых цифр)");
             Scanner in = new Scanner(System.in);
-            int numberToCall = in.nextInt();
+            String numberToCall = in.nextLine();
 
-            if (numberToCall < 250000000) {
+            if (!(numberToCall.length() == 9)) {
                 System.out.println("Неправильный номер. Номер должен иметь 9 цифр.");
                 i -= 2;
-            } else if (Integer.toString(numberToCall).startsWith("29")
-                    || Integer.toString(numberToCall).startsWith("33")
-                    || Integer.toString(numberToCall).startsWith("25")) {
+            } else if (numberToCall.startsWith("29")
+                    || numberToCall.startsWith("33")
+                    || numberToCall.startsWith("25")) {
                 phone.receiveCall(numberToCall);
                 phone.printBalance();
             } else {
