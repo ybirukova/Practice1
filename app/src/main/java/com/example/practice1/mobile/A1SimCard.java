@@ -1,8 +1,8 @@
 package com.example.practice1.mobile;
 
 public final class A1SimCard extends SimCard {
-    A1SimCard(int number, int balance) {
-        super("29" + number, balance);
+    A1SimCard(String number, int balance, int pin) {
+        super("29" + number, balance, pin);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.example.practice1.mobile;
 
 public final class MtsSimCard extends SimCard {
-    MtsSimCard(int number, int balance) {
-        super("33" + number, balance);
+    MtsSimCard(String number, int balance, int pin) {
+        super("33" + number, balance, pin);
     }
 
     @Override

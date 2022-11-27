@@ -1,12 +1,18 @@
 package com.example.practice1.mobile;
 
+import java.util.Scanner;
+
 public class SimCard {
     private String number;
     private int balance;
+    private int pin;
+    private boolean isLocked;
+    private int tries;
 
-    protected SimCard(String number, int balance) {
+    protected SimCard(String number, int balance, int pin) {
         this.number = number;
         this.balance = balance;
+        this.pin = pin;
     }
 
     int getBalance() {
@@ -49,5 +55,42 @@ public class SimCard {
 
     public void receiveCall(String numberFrom) {
         System.out.println("Принимаю звонок с номера " + numberFrom);
+    }
+
+    public void checkPin() {
+        if (!(getTries() == 3)) {
+            isLocked = false;
+            for (tries = 1; tries <= 3; tries++) {
+                System.out.println("Введите пин-код. Осталось попыток: " + (4 - tries));
+                Scanner in = new Scanner(System.in);
+                int pin1 = in.nextInt();
+                if (!(pin1 == pin)) {
+                    System.out.println("Неверный пин-код.");
+                    if (tries == 3) {
+                        isLocked = true;
+                        System.out.println("Попыток ввести пин-код больше нет. Симкарта заблокирована.");
+                    }
+                } else {
+                    isLocked = false;
+                    System.out.println("Пин-код верный.");
+                    break;
+                }
+            }
+        } else {
+            isLocked = true;
+            System.out.println("Симкарта заблокирована!!!");
+        }
+    }
+
+    boolean getIsLocked() {
+        return isLocked;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public int getTries() {
+        return tries;
     }
 }
