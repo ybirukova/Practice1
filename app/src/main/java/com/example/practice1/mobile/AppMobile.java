@@ -29,7 +29,7 @@ public class AppMobile {
                             } else {
                                 phone.turnOn();
                             }
-                        }
+                        }else System.out.println("Симкарта заблокирована!!!");
                         printCommands(phone.isTurnedOn(), phone.getSim().getIsLocked());
                         break;
                     }
@@ -57,7 +57,7 @@ public class AppMobile {
                             } else {
                                 System.out.println("Телефон выключен.");
                             }
-                        }
+                        } else System.out.println("Симкарта заблокирована!!!");
                         printCommands(phone.isTurnedOn(), phone.getSim().getIsLocked());
                         break;
                     }
@@ -68,7 +68,7 @@ public class AppMobile {
                             } else {
                                 System.out.println("Телефон выключен.");
                             }
-                        }
+                        }else System.out.println("Симкарта заблокирована!!!");
                         printCommands(phone.isTurnedOn(), phone.getSim().getIsLocked());
                         break;
                     }
@@ -100,7 +100,7 @@ public class AppMobile {
                             } else {
                                 System.out.println("Телефон выключен.");
                             }
-                        }
+                        }else System.out.println("Симкарта заблокирована!!!");
                         printCommands(phone.isTurnedOn(), phone.getSim().getIsLocked());
                         break;
                     }
@@ -113,7 +113,7 @@ public class AppMobile {
                                 phone.printBalance();
                             } else
                                 System.out.println("Телефон выключен.");
-                        }
+                        }else System.out.println("Симкарта заблокирована!!!");
                         printCommands(phone.isTurnedOn(), phone.getSim().getIsLocked());
                         break;
                     }
@@ -144,15 +144,13 @@ public class AppMobile {
         int diff = max - min;
         Random random = new Random();
         int i = random.nextInt(diff + 1) + min;
-        String str = Integer.toString(i);
-        return str;
+        return Integer.toString(i);
     }
 
     static int rnd(int min, int max) {
         int diff = max - min;
         Random random = new Random();
-        int i = random.nextInt(diff + 1) + min;
-        return i;
+        return random.nextInt(diff + 1) + min;
     }
 
     static SimCard[] createArrayOfSim() {

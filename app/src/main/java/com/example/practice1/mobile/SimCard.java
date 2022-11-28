@@ -7,7 +7,6 @@ public class SimCard {
     private int balance;
     private int pin;
     private boolean isLocked;
-    private int tries;
 
     protected SimCard(String number, int balance, int pin) {
         this.number = number;
@@ -58,9 +57,8 @@ public class SimCard {
     }
 
     public void checkPin() {
-        if (!(getTries() == 3)) {
-            isLocked = false;
-            for (tries = 1; tries <= 3; tries++) {
+            if (!isLocked){
+            for (int tries = 1; tries <= 3; tries++) {
                 System.out.println("Введите пин-код. Осталось попыток: " + (4 - tries));
                 Scanner in = new Scanner(System.in);
                 int pin1 = in.nextInt();
@@ -77,7 +75,6 @@ public class SimCard {
                 }
             }
         } else {
-            isLocked = true;
             System.out.println("Симкарта заблокирована!!!");
         }
     }
@@ -88,9 +85,5 @@ public class SimCard {
 
     public int getPin() {
         return pin;
-    }
-
-    public int getTries() {
-        return tries;
     }
 }
