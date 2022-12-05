@@ -7,6 +7,8 @@ public class TryThrow {
         signIn();
     }
 
+    private static final String INPUT_PATTERN = "[A-Za-z\\d_]{1,20}";
+
     static void signIn() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your login (it must contain only latin letters, numbers, underscore)");
@@ -25,11 +27,9 @@ public class TryThrow {
     }
 
     static boolean checkLoginAndPassword(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
-        String regex = "[A-Za-z\\d_]{1,20}";
-
-        if (!login.matches(regex)) {
+        if (!login.matches(INPUT_PATTERN)) {
             throw new WrongLoginException("Forbidden characters are used in login or the length of login is too large.");
-        } else if (!password.matches(regex)) {
+        } else if (!password.matches(INPUT_PATTERN)) {
             throw new WrongPasswordException("Forbidden characters are used in password or the length of password is too large.");
         } else if (!(confirmPassword.equals(password))) {
             throw new WrongPasswordException("Password isn't confirmed");
