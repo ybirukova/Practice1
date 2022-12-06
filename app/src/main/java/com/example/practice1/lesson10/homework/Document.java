@@ -4,32 +4,36 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Document {
-    public static final String PATTERN_LETTERS = "[A-Za-z]{1,10}";
-    public static final String PATTERN_NUMBERS = "[\\d]{1,10}";
-    public static final int LETTERS_LENGTH = 8;
-    public static final int NUMBERS_LENGTH = 10;
-    public static final int HYPHENS_LENGTH = 4;
-    public static final int[] L_POS = {5, 8, 14, 17, 19, 21};
-    public static final int[] N_POS = {0, 4, 9, 13, 18, 20};
-    public static final int[] H_POS = {4, 8, 13, 17};
+    private static final String PATTERN_LETTERS = "[A-Za-z]{1,10}";
+    private static final String PATTERN_NUMBERS = "[\\d]{1,10}";
+    private static final int LETTERS_LENGTH = 8;
+    private static final int NUMBERS_LENGTH = 10;
+    private static final int HYPHENS_LENGTH = 4;
+    private static final int[] LETTER_POS = {5, 8, 14, 17, 19, 21};
+    private static final int[] NUMBER_POS = {0, 4, 9, 13, 18, 20};
+    private static final int[] HYPHEN_POS = {4, 8, 13, 17};
+    private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String START_PHRASE = "Введите номер документа в формате xxxx-yyy-xxxx-yyy-xyxy, где x — число, а y — латинская буква.";
 
     public static String enterNumberOfDoc() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите номер документа в формате xxxx-yyy-xxxx-yyy-xyxy, где x — число, а y — латинская буква.");
-        String docNumber = scanner.nextLine();
-
-        try {
-            if (checkDocNumber(docNumber)) {
-                System.out.println("Номер документа верный.");
+        String docNumber;
+        System.out.println(START_PHRASE);
+        while (true) {
+            docNumber = SCANNER.nextLine();
+            try {
+                if (checkDocNumber(docNumber)) {
+                    System.out.println("Номер документа верный.");
+                    break;
+                } else System.out.println("Номер документа неверный.");
+            } catch (StringIndexOutOfBoundsException | WrongDocNumberException exc) {
+                System.out.println(exc);
+                System.out.println(START_PHRASE);
             }
-        } catch (StringIndexOutOfBoundsException | WrongDocNumberException indexOut) {
-            System.out.println(indexOut);
-            enterNumberOfDoc();
         }
         return docNumber;
     }
 
-    public static boolean checkDocNumber(String docNumber) throws WrongDocNumberException {
+    private static boolean checkDocNumber(String docNumber) throws WrongDocNumberException {
         StringBuilder letters = new StringBuilder();
         StringBuilder numbers = new StringBuilder();
         StringBuilder hyphens = new StringBuilder();
@@ -49,9 +53,9 @@ public class Document {
                 && (numbers.length() == NUMBERS_LENGTH)
                 && (hyphens.length() == HYPHENS_LENGTH));
 
-        String lettersOnPos = docNumber.substring(L_POS[0], L_POS[1]) + docNumber.substring(L_POS[2], L_POS[3]) + docNumber.charAt(L_POS[4]) + docNumber.charAt(L_POS[5]);
-        String numbersOnPos = docNumber.substring(N_POS[0], N_POS[1]) + docNumber.substring(N_POS[2], N_POS[3]) + docNumber.charAt(N_POS[4]) + docNumber.charAt(N_POS[5]);
-        String hyphensOnPos = ("" + docNumber.charAt(H_POS[0]) + docNumber.charAt(H_POS[1]) + docNumber.charAt(H_POS[2]) + docNumber.charAt(H_POS[3]));
+        String lettersOnPos = docNumber.substring(LETTER_POS[0], LETTER_POS[1]) + docNumber.substring(LETTER_POS[2], LETTER_POS[3]) + docNumber.charAt(LETTER_POS[4]) + docNumber.charAt(LETTER_POS[5]);
+        String numbersOnPos = docNumber.substring(NUMBER_POS[0], NUMBER_POS[1]) + docNumber.substring(NUMBER_POS[2], NUMBER_POS[3]) + docNumber.charAt(NUMBER_POS[4]) + docNumber.charAt(NUMBER_POS[5]);
+        String hyphensOnPos = ("" + docNumber.charAt(HYPHEN_POS[0]) + docNumber.charAt(HYPHEN_POS[1]) + docNumber.charAt(HYPHEN_POS[2]) + docNumber.charAt(HYPHEN_POS[3]));
         boolean isLettersPosCorrect = Pattern.matches(PATTERN_LETTERS, lettersOnPos);
         boolean isNumbersPosCorrect = Pattern.matches(PATTERN_NUMBERS, numbersOnPos);
         boolean isHyphensPosCorrect = Pattern.matches("----", hyphensOnPos);
@@ -63,17 +67,17 @@ public class Document {
         return true;
     }
 
-    public static void getFirst8Numbers(String docNumber) {
+    private static void getFirst8Numbers(String docNumber) {
         String first8Numbers = docNumber.substring(0, 4) + " " + docNumber.substring(9, 13);
         System.out.println("Два первых блока по 4 цифры: " + first8Numbers);
     }
 
-    public static void hideLetters(String docNumber) {
+    private static void hideLetters(String docNumber) {
         String newDocNumber = docNumber.substring(0, 5) + "***" + docNumber.substring(8, 14) + "***" + docNumber.substring(17);
         System.out.println("Номер документа (блоки из трех букв -> ***): " + newDocNumber);
     }
 
-    public static void printLetters(String docNumber) {
+    private static void printLetters(String docNumber) {
         StringBuilder str = new StringBuilder(docNumber.toUpperCase());
         str.deleteCharAt(20);
         str.delete(17, 19);
@@ -85,14 +89,14 @@ public class Document {
         System.out.println("Letters: " + str);
     }
 
-    public static void checkContaining(String docNumber, String substring) {
+    private static void checkContaining(String docNumber, String substring) {
         if (docNumber.matches("(?i).*" + substring + ".*")) {
             System.out.println(docNumber + " содержит в себе " + substring + " (независимо от регистра).");
         } else
             System.out.println(docNumber + " не содержит в себе " + substring + " (независимо от регистра).");
     }
 
-    public static void checkEndOfString(String docNumber) {
+    private static void checkEndOfString(String docNumber) {
         String docNumberLC = docNumber.toLowerCase();
         String endStr = "1a2b";
         if (docNumberLC.endsWith(endStr)) {
