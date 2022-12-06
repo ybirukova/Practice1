@@ -8,11 +8,9 @@ public class Task3 {
         System.out.println("Введите два числа");
         String firstNumber = scanner.nextLine();
         String secondNumber = scanner.nextLine();
-
     }
 
     static void workWithString (String firstNumber, String secondNumber){
-
         StringBuilder str = new StringBuilder(firstNumber);
         StringBuilder firstStr = str.append(firstNumber).append(" + ").append(secondNumber).append(" = ").append(firstNumber+secondNumber);
         StringBuilder secondStr = str.append(firstNumber).append(" + ").append(secondNumber).append(" = ").append(firstNumber+secondNumber);
@@ -21,5 +19,4 @@ public class Task3 {
 
         System.out.println(str.replace(0, str.length(), "+"));
     }
-
 }
