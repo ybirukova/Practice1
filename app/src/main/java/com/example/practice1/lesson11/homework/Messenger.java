@@ -21,12 +21,12 @@ public class Messenger {
             "5 - закончить выполнение программы";
 
     private static final String EMPTY_LIST_ERROR = "Список пользователей пуст. Сначала создайте пользователя.";
-    private static final String COMMAND_0 = "0";
-    private static final String COMMAND_1 = "1";
-    private static final String COMMAND_2 = "2";
-    private static final String COMMAND_3 = "3";
-    private static final String COMMAND_4 = "4";
-    private static final String COMMAND_5 = "5";
+    private static final String PRINT_ALL_COMMANDS = "0";
+    private static final String CREATE_USER = "1";
+    private static final String WRITE_MESSAGE = "2";
+    private static final String READ_MESSAGE = "3";
+    private static final String PRINT_USER_LIST = "4";
+    private static final String EXIT_PROGRAM = "5";
     private static final int SUCCESSFUL_TERMINATION = 0;
 
     private static String chooseCommand() {
@@ -37,28 +37,28 @@ public class Messenger {
 
     public static void doCommand(String command) {
         switch (command) {
-            case COMMAND_0:
+            case PRINT_ALL_COMMANDS:
                 System.out.println(COMMANDS);
                 break;
-            case COMMAND_1:
+            case CREATE_USER:
                 createUser();
                 break;
-            case COMMAND_2:
+            case WRITE_MESSAGE:
                 if (users.isEmpty()) {
                     System.out.println(EMPTY_LIST_ERROR);
                 } else writeTextOfMessage(chooseUserToWrite());
                 break;
-            case COMMAND_3:
+            case READ_MESSAGE:
                 if (users.isEmpty()) {
                     System.out.println(EMPTY_LIST_ERROR);
                 } else readAndDeleteMessageOfUser();
                 break;
-            case COMMAND_4:
+            case PRINT_USER_LIST:
                 if (users.isEmpty()) {
                     System.out.println(EMPTY_LIST_ERROR);
                 } else printListOfUser();
                 break;
-            case COMMAND_5:
+            case EXIT_PROGRAM:
                 exitProgram();
                 break;
             default:
@@ -135,9 +135,9 @@ public class Messenger {
         while (true) {
             whatToDo = SCANNER.next();
             SCANNER.nextLine();
-            if (whatToDo.equals(COMMAND_0)) {
+            if (whatToDo.equals(PRINT_ALL_COMMANDS)) {
                 return false;
-            } else if (whatToDo.equals(COMMAND_1)) {
+            } else if (whatToDo.equals(CREATE_USER)) {
                 return true;
             } else System.out.println("Неверно введена команда. Попробуйте еще раз.");
         }
