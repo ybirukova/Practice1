@@ -1,4 +1,4 @@
-package com.example.practice1.study7.task3;
+package com.example.practice1.lesson7.task3;
 
 public class Student {
     private String firstName;
