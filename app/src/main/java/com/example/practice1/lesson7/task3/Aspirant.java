@@ -1,4 +1,4 @@
-package com.example.practice1.study7.task3;
+package com.example.practice1.lesson7.task3;
 
 public class Aspirant extends Student {
     String scientificWork;

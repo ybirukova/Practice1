@@ -1,4 +1,4 @@
-package com.example.practice1.study7.task2;
+package com.example.practice1.lesson7.task2;
 
 public class Duck extends Animal {
     String color;

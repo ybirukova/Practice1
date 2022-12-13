@@ -1,4 +1,4 @@
-package com.example.practice1.study7.task1;
+package com.example.practice1.lesson7.task1;
 
 public class Audi extends Car {
     String model;
