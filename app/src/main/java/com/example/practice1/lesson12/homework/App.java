@@ -1,10 +1,13 @@
 package com.example.practice1.lesson12.homework;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class App {
+    private static HashMap<String, Pet> animals = new HashMap<>();
+    private static final String MESSAGE_TO_ENTER_ANIMAL_TO_DELETE = "Введите имя животного, которое хотите удалить из списка.";
+    private static final Scanner SCANNER = new Scanner(System.in);
+
     public static void main(String[] args) {
         Pet cat1 = new Cat("Bob", "No breed", 5);
         Pet cat2 = new Cat("Tom", "Persian", 11);
@@ -12,45 +15,29 @@ public class App {
         Pet dog2 = new Dog("Sherlock", "Collie", "Alex");
         Pet horse1 = new Horse("Dandelion", "Arabian", "brown");
 
-        putAnimalInHashMap(cat1);
-        putAnimalInHashMap(cat2);
-        putAnimalInHashMap(dog1);
-        putAnimalInHashMap(dog2);
-        putAnimalInHashMap(horse1);
+        animals.put(cat1.getName(), cat1);
+        animals.put(cat2.getName(), cat2);
+        animals.put(dog1.getName(), dog1);
+        animals.put(dog2.getName(), dog2);
+        animals.put(horse1.getName(), horse1);
 
-        printInfoAboutAnimal();
+        printInfoAboutAllAnimals();
         System.out.println(MESSAGE_TO_ENTER_ANIMAL_TO_DELETE);
         enterAnimalAndDeleteFromHashMap();
-        printInfoAboutAnimal();
+        printInfoAboutAllAnimals();
     }
 
-    static HashMap<String, Pet> animals = new HashMap<>();
-    static final String MESSAGE_TO_ENTER_ANIMAL_TO_DELETE = "Введите имя животного, которое хотите удалить из списка.";
-    static final Scanner SCANNER = new Scanner(System.in);
-
-    static void printInfoAboutAnimal() {
+    private static void printInfoAboutAllAnimals() {
         System.out.println("Список животных:");
         int i = 1;
-        for (Map.Entry<String, Pet> animal : animals.entrySet()) {
-            if (animal.getValue() instanceof Cat) {
-                System.out.println(i + ". Cat. Name: " + animal.getValue().getName() + " ; Breed: "
-                        + animal.getValue().getBreed() + " ; Age" + ((Cat) animal.getValue()).getAge());
-            } else if (animal.getValue() instanceof Dog) {
-                System.out.println(i + ". Dog. Name: " + animal.getValue().getName() + " ; Breed: "
-                        + animal.getValue().getBreed() + " ; Name of the owner: " + ((Dog) animal.getValue()).getOwnerName());
-            } else if (animal.getValue() instanceof Horse) {
-                System.out.println(i + ". Horse. Name: " + animal.getValue().getName() + " ; Breed: "
-                        + animal.getValue().getBreed() + " ; Color: " + ((Horse) animal.getValue()).getColor());
-            }
+        for (Pet pet : animals.values()) {
+            System.out.print(i + ". ");
+            pet.printInfoAboutAnimal();
             i++;
         }
     }
 
-    static void putAnimalInHashMap(Pet pet) {
-        animals.put(pet.getName(), pet);
-    }
-
-    static void enterAnimalAndDeleteFromHashMap() {
+    private static void enterAnimalAndDeleteFromHashMap() {
         while (true) {
             String animalNameToDelete = SCANNER.nextLine();
             if (animals.containsKey(animalNameToDelete)) {

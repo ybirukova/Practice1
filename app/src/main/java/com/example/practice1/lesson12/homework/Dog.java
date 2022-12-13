@@ -27,4 +27,9 @@ public class Dog extends Pet {
     public int hashCode() {
         return Objects.hash(ownerName, super.getName(), super.getBreed());
     }
+
+    @Override
+    public void printInfoAboutAnimal() {
+        System.out.println("Dog. Name: " + getName() + "; Breed: " + getBreed() + "; Owner name: " + getOwnerName());
+    }
 }

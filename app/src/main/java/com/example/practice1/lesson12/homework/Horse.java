@@ -27,4 +27,9 @@ public class Horse extends Pet {
     public int hashCode() {
         return Objects.hash(color, super.getName(), super.getBreed());
     }
+
+    @Override
+    public void printInfoAboutAnimal() {
+        System.out.println("Horse. Name: " + getName() + "; Breed: " + getBreed() + "; Color: " + getColor());
+    }
 }

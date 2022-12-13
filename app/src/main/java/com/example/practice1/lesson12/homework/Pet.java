@@ -16,4 +16,9 @@ public abstract class Pet {
     public String getBreed() {
         return breed;
     }
+
+    public void printInfoAboutAnimal() {
+        System.out.println("Name: " + getName() + "; Breed: "
+                + getBreed());
+    }
 }

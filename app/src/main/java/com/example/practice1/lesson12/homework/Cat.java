@@ -27,4 +27,9 @@ public class Cat extends Pet {
     public int hashCode() {
         return Objects.hash(age, super.getName(), super.getBreed());
     }
+
+    @Override
+    public void printInfoAboutAnimal() {
+        System.out.println("Cat. Name: " + getName() + "; Breed: " + getBreed() + "; Age: " + getAge());
+    }
 }
