@@ -29,19 +29,12 @@ public class App {
 
         List<Integer> numberList = randomNumbers.stream()
                 .distinct()
-                .collect(Collectors.toList());
-
-        System.out.print("Четные числа от 7 до 17: ");
-        for (int number : numberList) {
-            printEvenNumbersFrom7To17.accept(number);
-        }
-        numberList = numberList.stream()
+                .peek(number -> printEvenNumbersFrom7To17.accept(number))
                 .map(number -> number * MULTIPLIER)
                 .filter(number -> number > MIN_LIMIT)
                 .collect(Collectors.toList());
         System.out.println();
-        System.out.println("Элементы в стриме (после *2, >10): " + numberList);
-        System.out.println("Количество элементов в стриме: " + numberList.size());
+        System.out.println("Количество элементов в стриме: " + numberList.stream().count());
         System.out.println("Среднее арифметическое всех элементов в стриме: " + numberList.stream().collect(Collectors.averagingInt(num -> num)));
     }
 
