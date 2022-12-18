@@ -26,15 +26,16 @@ public class App {
     public static void main(String[] args) {
         fillListRandomNumbers(enterAmountOfNumbers());
         System.out.println("Изначальный список чисел: " + randomNumbers);
-
+        System.out.print("Четные числа от 7 до 17: ");
         List<Integer> numberList = randomNumbers.stream()
                 .distinct()
-                .peek(number -> printEvenNumbersFrom7To17.accept(number))
+                .peek(printEvenNumbersFrom7To17)
                 .map(number -> number * MULTIPLIER)
                 .filter(number -> number > MIN_LIMIT)
                 .collect(Collectors.toList());
+
         System.out.println();
-        System.out.println("Количество элементов в стриме: " + numberList.stream().count());
+        System.out.println("Количество элементов в стриме (после удаления дубликатов, *2 и фильтра >10): " + numberList.stream().count());
         System.out.println("Среднее арифметическое всех элементов в стриме: " + numberList.stream().collect(Collectors.averagingInt(num -> num)));
     }
 
