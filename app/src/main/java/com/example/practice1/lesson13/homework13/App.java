@@ -8,7 +8,6 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class App {
-    private static final List<Integer> randomNumbers = new ArrayList<>();
     private static final Scanner SCANNER = new Scanner(System.in);
     private static final Random RANDOM = new Random();
     private static final int BOUND = 30;
@@ -24,7 +23,8 @@ public class App {
     };
 
     public static void main(String[] args) {
-        fillListRandomNumbers(enterAmountOfNumbers());
+        List<Integer> randomNumbers = createListOfRandomNumbers(enterAmountOfNumbers());
+
         System.out.println("Изначальный список чисел: " + randomNumbers);
         System.out.print("Четные числа от 7 до 17: ");
         List<Integer> numberList = randomNumbers.stream()
@@ -35,8 +35,10 @@ public class App {
                 .collect(Collectors.toList());
 
         System.out.println();
-        System.out.println("Количество элементов в стриме (после удаления дубликатов, *2 и фильтра >10): " + numberList.stream().count());
-        System.out.println("Среднее арифметическое всех элементов в стриме: " + numberList.stream().collect(Collectors.averagingInt(num -> num)));
+        long amountOfElementsInStream = numberList.stream().count();
+        double averageOfAllElementsInStream = numberList.stream().collect(Collectors.averagingInt(num -> num));
+        System.out.println("Количество элементов в стриме (после удаления дубликатов, *2 и фильтра >10): " + amountOfElementsInStream );
+        System.out.println("Среднее арифметическое всех элементов в стриме: " + averageOfAllElementsInStream);
     }
 
     private static int enterAmountOfNumbers() {
@@ -51,9 +53,11 @@ public class App {
         }
     }
 
-    private static void fillListRandomNumbers(int amount) {
+    private static List<Integer> createListOfRandomNumbers(int amount) {
+        List<Integer> randomNumbers = new ArrayList<>();
         for (int i = 0; i < amount; i++) {
             randomNumbers.add(RANDOM.nextInt(BOUND));
         }
+        return randomNumbers;
     }
 }
