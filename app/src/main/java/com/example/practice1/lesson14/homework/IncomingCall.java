@@ -7,6 +7,15 @@ public class IncomingCall {
     private String purpose;
     public static final Random RANDOM = new Random();
 
+    private static final int CASE_CONSULT = 1;
+    private static final int CASE_ORDER = 2;
+    private static final int CASE_RETURN = 3;
+    private static final int CASE_PREORDER = 4;
+    private static final int CASE_CONDITIONS = 5;
+    private static final int CASE_CANCEL_ORDER = 6;
+    private static final int CASE_ERROR_CALL = 7;
+    private static final int CASE_SERVICE_ORDER = 8;
+
     public IncomingCall() {
         this.id = setRandomId();
         this.purpose = setRandomPurpose();
@@ -27,28 +36,28 @@ public class IncomingCall {
     private String setRandomPurpose() {
         int randomNumber = RANDOM.nextInt(8) + 1;
         switch (randomNumber) {
-            case 1:
+            case CASE_CONSULT:
                 purpose = "консультация";
                 break;
-            case 2:
+            case CASE_ORDER:
                 purpose = "оформление заказа";
                 break;
-            case 3:
+            case CASE_RETURN:
                 purpose = "оформление возврата";
                 break;
-            case 4:
+            case CASE_PREORDER:
                 purpose = "предзаказ";
                 break;
-            case 5:
+            case CASE_CONDITIONS:
                 purpose = "уточнение условий доставки";
                 break;
-            case 6:
+            case CASE_CANCEL_ORDER:
                 purpose = "отмена заказа";
                 break;
-            case 7:
+            case CASE_ERROR_CALL:
                 purpose = "ошибочный звонок";
                 break;
-            case 8:
+            case CASE_SERVICE_ORDER:
                 purpose = "заказ услуг";
                 break;
         }

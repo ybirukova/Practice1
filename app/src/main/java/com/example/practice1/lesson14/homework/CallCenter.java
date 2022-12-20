@@ -13,9 +13,6 @@ public class CallCenter {
 
     public static void main(String[] args) {
         List<IncomingCall> listOfCalls = new ArrayList<>();
-        for (int i = 0; i < AMOUNT_OF_CALLS; i++) {
-            listOfCalls.add(new IncomingCall());
-        }
 
         Runnable myRunnable = () -> {
             for (int i = 0; i < AMOUNT_OF_CALLS; i++) {
@@ -28,7 +25,7 @@ public class CallCenter {
                         try {
                             Thread.sleep(TIME_TO_SLEEP);
                         } catch (Exception e) {
-                            System.out.println("ошибка");
+                            e.printStackTrace();
                         }
                     }
                 }
