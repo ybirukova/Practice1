@@ -6,50 +6,28 @@ import java.util.Scanner;
 
 public class LiftHall {
     private int amountOfPassengers;
-    private boolean isBigLiftIsEmpty;
     private int totalAmountByBigLift;
     private int totalAmountBySpeedLift;
-    private final int CAPACITY_OF_BIG_LIFT = 10;
-    private final int CAPACITY_OF_SPEED_LIFT = 6;
     private final int EXIT_STATUS = 1;
 
-    public synchronized void getByBigLift() {
-        isBigLiftIsEmpty = true;
-        if (amountOfPassengers >= CAPACITY_OF_BIG_LIFT) {
-            System.out.println("Большой лифт поднял " + CAPACITY_OF_BIG_LIFT + " человек.");
-            totalAmountByBigLift += CAPACITY_OF_BIG_LIFT;
-            amountOfPassengers -= CAPACITY_OF_BIG_LIFT;
-            isBigLiftIsEmpty = false;
+    public synchronized void getByLift(int capacity, String name) {
+        if (amountOfPassengers >= capacity) {
+            if (capacity == 6) {
+                totalAmountBySpeedLift += capacity;
+            } else totalAmountByBigLift += capacity;
+            amountOfPassengers -= capacity;
+            System.out.println(name + " лифт поднял " + capacity + " человек.");
         } else if (amountOfPassengers != NULL_AMOUNT) {
-            System.out.println("Большой лифт поднял " + amountOfPassengers + " человек.");
-            totalAmountByBigLift += amountOfPassengers;
+            System.out.println(name + " лифт поднял " + amountOfPassengers + " человек.");
+            if (capacity == 6) {
+                totalAmountBySpeedLift += amountOfPassengers;
+            } else totalAmountByBigLift += amountOfPassengers;
             amountOfPassengers = NULL_AMOUNT;
         }
-        notify();
-    }
-
-    public synchronized void getBySpeedLift() {
-        while (isBigLiftIsEmpty) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        if (amountOfPassengers >= CAPACITY_OF_SPEED_LIFT) {
-            totalAmountBySpeedLift += CAPACITY_OF_SPEED_LIFT;
-            amountOfPassengers -= CAPACITY_OF_SPEED_LIFT;
-            System.out.println("Скоростной лифт поднял " + CAPACITY_OF_SPEED_LIFT + " человек.");
-        } else if (amountOfPassengers != NULL_AMOUNT) {
-            System.out.println("Скоростной лифт поднял " + amountOfPassengers + " человек.");
-            totalAmountBySpeedLift += amountOfPassengers;
-            amountOfPassengers = NULL_AMOUNT;
-        }
-        notify();
     }
 
     public void setAmountOfPassengers() {
-        System.out.println("Введите количество людей, пришедщих на площадку. При вводе 0 программа завершит выполнение.");
+        System.out.println("Введите количество людей, пришедших на площадку. При вводе 0 программа завершит выполнение.");
         Scanner scanner = new Scanner(System.in);
         while (true)
             try {
@@ -70,10 +48,6 @@ public class LiftHall {
 
     public int getAmountOfPassengers() {
         return amountOfPassengers;
-    }
-
-    public void setIsBigLiftEmpty(boolean isBigLiftEmpty) {
-        this.isBigLiftIsEmpty = isBigLiftEmpty;
     }
 
     public void printTotalAmountByBothLifts() {

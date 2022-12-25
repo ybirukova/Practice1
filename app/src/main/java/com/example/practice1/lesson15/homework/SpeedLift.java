@@ -1,26 +1,26 @@
 package com.example.practice1.lesson15.homework;
 
-import static com.example.practice1.lesson15.homework.App.NULL_AMOUNT;
-
-public class SpeedLift implements Runnable {
-    LiftHall liftHall;
-
+public class SpeedLift extends Lift {
     private final int TIME = 1000;
+    private final String NAME = "Скоростной";
+    private final int CAPACITY = 6;
 
     public SpeedLift(LiftHall liftHall) {
-        this.liftHall = liftHall;
+        super(liftHall);
     }
 
     @Override
-    public void run() {
-        while (liftHall.getAmountOfPassengers() != NULL_AMOUNT) {
-            liftHall.getBySpeedLift();
-            try {
-                Thread.sleep(TIME);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        Thread.currentThread().interrupt();
+    public int getTime() {
+        return TIME;
+    }
+
+    @Override
+    public String getNameLift() {
+        return NAME;
+    }
+
+    @Override
+    public int getCapacity() {
+        return CAPACITY;
     }
 }
